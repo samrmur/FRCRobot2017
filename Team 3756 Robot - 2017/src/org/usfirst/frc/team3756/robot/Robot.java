@@ -4,17 +4,16 @@ package org.usfirst.frc.team3756.robot;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import org.usfirst.frc.team3756.robot.commands.ExampleCommand;
+import org.usfirst.frc.team3756.robot.commands.TimedDrive;
 import org.usfirst.frc.team3756.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team3756.robot.subsystems.ExampleSubsystem;
 
 /**
- * The VM is configured to automatically run this class, and to call the
+ * The VM (Virtual Machine) is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the IterativeRobot
  * documentation. If you change the name of this class or the package after
  * creating this project, you must also update the manifest file in the resource
@@ -27,9 +26,12 @@ public class Robot extends IterativeRobot {
 	
 	// Declare Controller Mapping Class
 	public static OI oi;
-
+	
+	// Declare autonomous command
 	Command autonomousCommand;
-	SendableChooser<Command> chooser = new SendableChooser<>();
+	
+	// Declare SendableChooser (to allow for the ability to choose commands on the SmartDashboard)
+	SendableChooser<Command> autoChooser;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -40,10 +42,15 @@ public class Robot extends IterativeRobot {
 		// Initialize all subsystems
         driveTrain = new DriveTrain();
 		oi = new OI();
-		chooser.addDefault("Default Auto", new ExampleCommand());
-		// chooser.addObject("My Auto", new MyAutoCommand());
-		SmartDashboard.putData("Auto mode", chooser);
-	}
+		
+		// Initialize chooser, add commands to chooser and display on the SmartDashboard
+		autoChooser = new SendableChooser<>();
+		autoChooser.addDefault("Default Auto", new TimedDrive(2.5, 1, 1));
+		SmartDashboard.putData("Autonomous Choices", autoChooser);
+		
+		// Show what command your subsystem is running on the SmartDashboard
+        SmartDashboard.putData(driveTrain);
+	} // End of method
 
 	/**
 	 * This function is called once each time the robot enters Disabled mode.
@@ -73,7 +80,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		autonomousCommand = chooser.getSelected();
+		autonomousCommand = autoChooser.getSelected();
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
@@ -82,42 +89,33 @@ public class Robot extends IterativeRobot {
 		 * autonomousCommand = new ExampleCommand(); break; }
 		 */
 
-		// schedule the autonomous command (example)
+		// Starts the command as long as one exists
 		if (autonomousCommand != null)
 			autonomousCommand.start();
-	}
+	} // End of method
 
-	/**
-	 * This function is called periodically during autonomous
-	 */
+	// This function is called periodically during autonomous
 	@Override
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
-	}
+	} // End of method
 
 	@Override
 	public void teleopInit() {
-		// This makes sure that the autonomous stops running when
-		// teleop starts running. If you want the autonomous to
-		// continue until interrupted by another command, remove
-		// this line or comment it out.
+		// Stops autonomous command from continuing when tele-operated period has started
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
-	}
+	} // End of method
 
-	/**
-	 * This function is called periodically during operator control
-	 */
+	// This function is called periodically during operator control
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-	}
+	} // End of method
 
-	/**
-	 * This function is called periodically during test mode
-	 */
+	// This function is called periodically during test mode
 	@Override
 	public void testPeriodic() {
 		LiveWindow.run();
-	}
-}
+	} // End of method
+} // End of class
