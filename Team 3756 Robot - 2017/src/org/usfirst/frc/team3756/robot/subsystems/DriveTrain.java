@@ -7,6 +7,8 @@
 
 package org.usfirst.frc.team3756.robot.subsystems;
 
+import org.usfirst.frc.team3756.robot.commands.DriveWithController;
+
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.VictorSP;
@@ -53,8 +55,8 @@ public class DriveTrain extends Subsystem {
 	} // End of method
 	
 	// Use to drive subsystem in teleop mode
-	public void drive(XboxController driveController){
-		driveRobot.arcadeDrive(driveController);
+	public void drive(XboxController driveController, int moveAxis, int rotateAxis){
+		driveRobot.arcadeDrive(driveController, moveAxis, driveController, rotateAxis);
 	} // End of method
 	
 	// Use these methods for autonomous mode
@@ -67,7 +69,6 @@ public class DriveTrain extends Subsystem {
 	
 	// Initial command launched by this subsystem
     public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-        // setDefaultCommand(new MySpecialCommand());
+        setDefaultCommand(new DriveWithController());
     } // End of method
 } // End of class
