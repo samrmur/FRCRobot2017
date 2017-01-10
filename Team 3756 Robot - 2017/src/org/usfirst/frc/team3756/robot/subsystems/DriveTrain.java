@@ -11,9 +11,10 @@ import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.command.Subsystem;
 
 // Start of DriveTrain
-public class DriveTrain {
+public class DriveTrain extends Subsystem {
 	// Declare each separate speed controller
 	public SpeedController leftFront;
 	public SpeedController leftMiddle;
@@ -67,6 +68,6 @@ public class DriveTrain {
 	// Initial command launched by this subsystem
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
+        // setDefaultCommand(new MySpecialCommand());
     } // End of method
 } // End of class
