@@ -1,7 +1,11 @@
 package org.usfirst.frc.team3756.robot;
 
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
+import org.usfirst.frc.team3756.robot.commandgroups.autoCommandGroup1;
 import org.usfirst.frc.team3756.robot.commands.ExampleCommand;
 
 /**
@@ -9,6 +13,35 @@ import org.usfirst.frc.team3756.robot.commands.ExampleCommand;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
+	// Declare and instantiate the Xbox controller object
+	private XboxController userController = new XboxController(0);
+	
+	// Constructor of the class
+	public OI() {
+		// Create JoystickButton objects for any required buttons to control the robot
+		JoystickButton xboxAButton = new JoystickButton(userController, 1);
+		//xboxAButton.whileHeld(new someCommand());
+		//xboxAButton.whenReleased(new someCommand());
+		JoystickButton xboxBButton = new JoystickButton(userController, 2);
+		//xboxBButton.whileHeld(new someCommand());
+		//xboxBButton.whenReleased(new someCommand());
+		JoystickButton xboxXButton = new JoystickButton(userController, 3);
+		//xboxXButton.whileHeld(new someCommand());
+		//xboxXButton.whenReleased(new someCommand());
+		JoystickButton xboxYButton = new JoystickButton(userController, 4);
+		//xboxYButton.whileHeld(new someCommand());
+		//xboxYButton.whenReleased(new someCommand());
+		JoystickButton xboxLeftBumper = new JoystickButton(userController, 5);
+		//xboxLeftBumper.whileHeld(new someCommand());
+		//xboxLeftBumper.whenReleased(new someCommand());
+		JoystickButton xboxRightBumper = new JoystickButton(userController, 6);
+		//xboxRightBumper.whileHeld(new someCommand());
+		//xboxRightBumper.whenReleased(new someCommand());
+		JoystickButton xboxBackButton = new JoystickButton(userController, 7);
+		//xboxBackButton.whileHeld(new someCommand());
+		//xboxBackButton.whileReleased(new someCommand());
+	} // End of constructor
+	
 	//// CREATING BUTTONS
 	// One type of button is a joystick button which is any button on a
 	//// joystick.
