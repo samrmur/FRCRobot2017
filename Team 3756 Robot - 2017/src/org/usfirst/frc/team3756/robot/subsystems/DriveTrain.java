@@ -31,7 +31,12 @@ public class DriveTrain extends Subsystem {
 	
 	// Declare the robot drive train
 	public RobotDrive driveRobot;
-
+	
+	/**
+	 * Creates a subsystem which will allow the robot to drive. This class allows the program to identify the victor 
+	 * speed controllers connected to the robot by port. It also connects the robot's drive train speed controllers 
+	 * (dependent on the side) in order to make them act two speed controllers (left and right).
+	 */
 	public DriveTrain() {
 		// Initialize each speed controller
 		leftFront = new VictorSP(0);
@@ -54,15 +59,29 @@ public class DriveTrain extends Subsystem {
 	    driveRobot.setSafetyEnabled(false);
 	} // End of method
 	
-	// Use to drive subsystem in teleop mode
+	/**
+	 * Allows the robot to be driven by an Xbox Controller using any axis from either joystick on the controller 
+	 * for vertical movement and horizontal movement.
+	 * @param driveController is an Xbox Controller connecting to the drive station.
+	 * @param moveAxis is the port for the controller's left or right stick axis used to move the robot forwards or backwards.
+	 * @param rotateAxis is the port for the controller's left or right stick axis used to move the robot left or right.
+	 */
 	public void drive(XboxController driveController, int moveAxis, int rotateAxis){
 		driveRobot.arcadeDrive(driveController, moveAxis, driveController, rotateAxis);
 	} // End of method
 	
-	// Use these methods for autonomous mode
+	/**
+	 * Allows the robot to be driven autonomously using 
+	 * @param straight is an Xbox Controller connecting to the drive station.
+	 * @param turn is the port for the controller's left or right stick axis used to move the robot forwards or backwards.
+	 */
 	public void drive(double straight, double turn){
 		driveRobot.arcadeDrive(straight, turn);
 	} // End of method
+	
+	/**
+	 * Stops the robot from moving at all
+	 */
 	public void stopDT(){
 		driveRobot.arcadeDrive(0,0);
 	} // End of method

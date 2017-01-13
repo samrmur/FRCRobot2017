@@ -20,6 +20,12 @@ public class TimedDrive extends Command {
 	public double speed = 2;
 	public double turn = 0;
 	
+	/**
+	 * Moves the robot autonomously for a certain amount of time and speed.
+	 * @param providedTime is the amount of time the robot will use the command for 
+	 * @param providedSpeed is the speed the robot will travel at (+ for forwards, - for backwards)
+	 * @param providedTurn is the speed the robot will turn at
+	 */
     public TimedDrive(double providedTime, double providedSpeed, double providedTurn) {
     	// Initialize or change variables based on parameters
     	time = providedTime;

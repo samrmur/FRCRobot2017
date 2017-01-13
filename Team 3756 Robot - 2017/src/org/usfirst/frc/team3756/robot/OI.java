@@ -56,6 +56,10 @@ public class OI {
 		//xboxRightStickButton.whenPressed(new someCommand());
 	} // End of constructor
 	
+	/**
+	 * Retrieves the required for tele-operated commands such as driving with a joystick
+	 * @return the Xbox Controller defined in the OI class
+	 */
 	public XboxController getController() {
 		return userController;
 	} // End of method

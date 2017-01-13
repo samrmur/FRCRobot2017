@@ -1,12 +1,17 @@
 package org.usfirst.frc.team3756.robot.commandgroups;
 
+import org.usfirst.frc.team3756.robot.commands.TimedDrive;
+
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 // Start of autoCommandGroup1
-public class autoCommandGroup1 extends CommandGroup {
+public class AutoCommandGroup1 extends CommandGroup {
 
-    public autoCommandGroup1() {
-        // Add Commands here:
+    public AutoCommandGroup1() {
+        // Example Group
+    	addSequential(new TimedDrive(2.5, 1, 1));
+    	
+    	// Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
         // these will run in order.

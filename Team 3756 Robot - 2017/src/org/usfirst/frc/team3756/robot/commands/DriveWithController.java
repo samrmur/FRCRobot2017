@@ -14,6 +14,9 @@ import edu.wpi.first.wpilibj.command.Command;
 // Start of DriveWithController
 public class DriveWithController extends Command {
 
+	/**
+	 * Drives the robot using Generic HID (Human Interface Device) such as a Joystick or Xbox Controller
+	 */
     public DriveWithController() {
     	// Get the subsystem
     	requires(Robot.driveTrain);
