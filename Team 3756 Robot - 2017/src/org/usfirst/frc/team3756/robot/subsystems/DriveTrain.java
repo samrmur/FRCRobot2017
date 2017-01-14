@@ -18,16 +18,16 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 // Start of DriveTrain
 public class DriveTrain extends Subsystem {
 	// Declare each separate speed controller
-	public SpeedController leftFront;
-	public SpeedController leftMiddle;
-	public SpeedController leftBack;
-	public SpeedController rightFront;
-	public SpeedController rightMiddle;
-	public SpeedController rightBack;
+	private SpeedController leftFront;
+	private SpeedController leftMiddle;
+	private SpeedController leftBack;
+	private SpeedController rightFront;
+	private SpeedController rightMiddle;
+	private SpeedController rightBack;
 	
 	// Declare each Speed Controller (which will contain an array of speed controllers that will act as one)
-	public SpeedController leftSide;
-	public SpeedController rightSide;
+	private SpeedController leftSide;
+	private SpeedController rightSide;
 	
 	// Declare the robot drive train
 	public RobotDrive driveRobot;

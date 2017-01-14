@@ -1,5 +1,8 @@
 package org.usfirst.frc.team3756.robot;
 
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.cscore.VideoMode;
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -7,7 +10,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import org.usfirst.frc.team3756.robot.commands.TimedDrive;
+import org.usfirst.frc.team3756.robot.commandgroups.AutoCommandGroup1;
 import org.usfirst.frc.team3756.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team3756.robot.subsystems.LimitSwitch;
 
@@ -22,6 +25,7 @@ public class Robot extends IterativeRobot {
 	// Declare subsystems
 	public static DriveTrain driveTrain;
 	public static LimitSwitch limitSwitch;
+	private static UsbCamera lifeCam;
 	
 	// Declare Controller Mapping Class
 	public static OI oi;
@@ -41,10 +45,15 @@ public class Robot extends IterativeRobot {
 		// Initialize all subsystems
         driveTrain = new DriveTrain();
 		oi = new OI();
+		limitSwitch = new LimitSwitch();
+		
+		// Configure camera 
+		lifeCam = CameraServer.getInstance().startAutomaticCapture();
+		lifeCam.setVideoMode(VideoMode.PixelFormat.kBGR, 680, 480, 25);
 		
 		// Initialize chooser, add commands to chooser and display on the SmartDashboard
 		autoChooser = new SendableChooser<>();
-		autoChooser.addDefault("Default Auto", new TimedDrive(2.5, 1, 1));
+		autoChooser.addDefault("Default Auto", new AutoCommandGroup1());
 		SmartDashboard.putData("Autonomous Choices", autoChooser);
 		
 		// Show what command your subsystem is running on the SmartDashboard
