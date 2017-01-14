@@ -29,18 +29,12 @@ public class SpeedControllerArray implements SpeedController {
 		return motors[0].get();
 	} //End of get
 	
-	public void set(double speed, byte syncGroup) {
+	@Override
+	public void set(double speed) {
 		for (SpeedController motor : motors) {
 			motor.set(speed);
 		} // End of for statement
 	} // End of method
-	
-	@Override
-	public void set(double speed) {
-		for (SpeedController motor : motors) {
-			this.set(speed);
-		} //End of for statement
-	} //End of set (speed)
 
 	@Override
 	public void setInverted(boolean isInverted) {

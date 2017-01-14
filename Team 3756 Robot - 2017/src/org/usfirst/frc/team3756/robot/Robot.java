@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team3756.robot.commands.TimedDrive;
 import org.usfirst.frc.team3756.robot.subsystems.DriveTrain;
-import org.usfirst.frc.team3756.robot.subsystems.ExampleSubsystem;
+import org.usfirst.frc.team3756.robot.subsystems.LimitSwitch;
 
 /**
  * The VM (Virtual Machine) is configured to automatically run this class, and to call the
@@ -21,7 +21,7 @@ import org.usfirst.frc.team3756.robot.subsystems.ExampleSubsystem;
 public class Robot extends IterativeRobot {
 	// Declare subsystems
 	public static DriveTrain driveTrain;
-	public static ExampleSubsystem exampleSubsystem;
+	public static LimitSwitch limitSwitch;
 	
 	// Declare Controller Mapping Class
 	public static OI oi;

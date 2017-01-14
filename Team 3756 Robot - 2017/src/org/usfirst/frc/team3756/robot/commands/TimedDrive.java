@@ -15,10 +15,10 @@ import edu.wpi.first.wpilibj.command.Command;
 // Start of TimedDrive
 public class TimedDrive extends Command {
 	// Declare variables
-	public Timer timer;
-	public double time;
-	public double speed = 2;
-	public double turn = 0;
+	private Timer timer;
+	private double time;
+	private double speed;
+	private double turn;
 	
 	/**
 	 * Moves the robot autonomously for a certain amount of time and speed.
