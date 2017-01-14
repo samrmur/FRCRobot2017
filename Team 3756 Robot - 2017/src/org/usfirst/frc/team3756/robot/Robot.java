@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team3756.robot.commandgroups.AutoCommandGroup1;
+import org.usfirst.frc.team3756.robot.subsystems.DriveEncoder;
 import org.usfirst.frc.team3756.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team3756.robot.subsystems.LimitSwitch;
 
@@ -25,6 +26,7 @@ public class Robot extends IterativeRobot {
 	// Declare subsystems
 	public static DriveTrain driveTrain;
 	public static LimitSwitch limitSwitch;
+	public static DriveEncoder encoder;
 	private static UsbCamera lifeCam;
 	
 	// Declare Controller Mapping Class
@@ -48,8 +50,8 @@ public class Robot extends IterativeRobot {
 		limitSwitch = new LimitSwitch();
 		
 		// Configure camera 
-		lifeCam = CameraServer.getInstance().startAutomaticCapture();
 		lifeCam.setVideoMode(VideoMode.PixelFormat.kBGR, 680, 480, 25);
+		lifeCam = CameraServer.getInstance().startAutomaticCapture();
 		
 		// Initialize chooser, add commands to chooser and display on the SmartDashboard
 		autoChooser = new SendableChooser<>();

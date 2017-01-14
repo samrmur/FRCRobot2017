@@ -9,6 +9,7 @@ package org.usfirst.frc.team3756.robot.subsystems;
 
 import org.usfirst.frc.team3756.robot.commands.DriveWithController;
 
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.VictorSP;
