@@ -21,7 +21,7 @@ public class DriveToDistance extends Command {
 	/**
 	 * Robot will drive until it hits a certain distance (in meters)
 	 * @param distance is the distance the robot will travel
-	 * @param speed is the speed the robot will travel at
+	 * @param speed is the speed the robot will travel at (+1 to -1)
 	 * @param curve is the speed the robot will turn at
 	 */
     public DriveToDistance(double distance, double speed, double curve) {

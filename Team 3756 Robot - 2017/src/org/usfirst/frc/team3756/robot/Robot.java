@@ -48,6 +48,7 @@ public class Robot extends IterativeRobot {
         driveTrain = new DriveTrain();
 		oi = new OI();
 		limitSwitch = new LimitSwitch();
+		encoder = new DriveEncoder();
 		
 		// Configure camera 
 		lifeCam.setVideoMode(VideoMode.PixelFormat.kBGR, 680, 480, 25);
@@ -60,6 +61,8 @@ public class Robot extends IterativeRobot {
 		
 		// Show what command your subsystem is running on the SmartDashboard
         SmartDashboard.putData(driveTrain);
+        SmartDashboard.putData(limitSwitch);
+        SmartDashboard.putData(encoder);
 	} // End of method
 
 	/*

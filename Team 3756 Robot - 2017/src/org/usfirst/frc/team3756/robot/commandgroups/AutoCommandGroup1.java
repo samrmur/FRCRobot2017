@@ -1,5 +1,7 @@
 package org.usfirst.frc.team3756.robot.commandgroups;
 
+import org.usfirst.frc.team3756.robot.commands.DriveToDistance;
+import org.usfirst.frc.team3756.robot.commands.MoveUntilClick;
 import org.usfirst.frc.team3756.robot.commands.TimedDrive;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -9,7 +11,9 @@ public class AutoCommandGroup1 extends CommandGroup {
 
     public AutoCommandGroup1() {
         // Example Group
-    	addSequential(new TimedDrive(2.5, 1, 1));
+    	addSequential(new DriveToDistance(2.5, 1, 0));
+    	addSequential(new TimedDrive(2.5, 0, -2));
+    	addSequential(new MoveUntilClick(1, 0));
     	
     	// Add Commands here:
         // e.g. addSequential(new Command1());
