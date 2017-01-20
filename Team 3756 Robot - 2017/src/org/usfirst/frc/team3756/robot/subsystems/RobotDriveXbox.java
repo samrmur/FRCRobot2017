@@ -17,5 +17,5 @@ public class RobotDriveXbox extends RobotDrive {
 		
 		arcadeDrive(moveValue, rotateValue, true);
 	} // End of method
-} // ENd of class
+} // End of class
 
