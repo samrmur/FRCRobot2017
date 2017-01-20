@@ -1,9 +1,9 @@
 package org.usfirst.frc.team3756.robot;
 
 import edu.wpi.cscore.UsbCamera;
-import edu.wpi.cscore.VideoMode;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.NamedSendable;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team3756.robot.commandgroups.AutoCommandGroup1;
+import org.usfirst.frc.team3756.robot.commandgroups.AutoCommandGroup2;
 import org.usfirst.frc.team3756.robot.subsystems.DriveEncoder;
 import org.usfirst.frc.team3756.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team3756.robot.subsystems.LimitSwitch;
@@ -27,7 +28,7 @@ public class Robot extends IterativeRobot {
 	public static DriveTrain driveTrain;
 	public static LimitSwitch limitSwitch;
 	public static DriveEncoder encoder;
-	private static UsbCamera lifeCam;
+	public static UsbCamera lifeCam;
 	
 	// Declare Controller Mapping Class
 	public static OI oi;
@@ -51,18 +52,20 @@ public class Robot extends IterativeRobot {
 		encoder = new DriveEncoder();
 		
 		// Configure camera 
-		lifeCam.setVideoMode(VideoMode.PixelFormat.kBGR, 680, 480, 25);
 		lifeCam = CameraServer.getInstance().startAutomaticCapture();
+		lifeCam.setResolution(320, 240);
+		lifeCam.setFPS(15);
 		
 		// Initialize chooser, add commands to chooser and display on the SmartDashboard
 		autoChooser = new SendableChooser<>();
-		autoChooser.addDefault("Default Auto", new AutoCommandGroup1());
-		SmartDashboard.putData("Autonomous Choices", autoChooser);
+		autoChooser.addDefault("Default Command", new AutoCommandGroup1());
+		autoChooser.addObject("Position 1 Command", new AutoCommandGroup2());
 		
 		// Show what command your subsystem is running on the SmartDashboard
+		SmartDashboard.putString("autoName", "Autonomous Commands");
+		SmartDashboard.putData("autoChooser", autoChooser);
         SmartDashboard.putData(driveTrain);
         SmartDashboard.putData(limitSwitch);
-        SmartDashboard.putData(encoder);
 	} // End of method
 
 	/*

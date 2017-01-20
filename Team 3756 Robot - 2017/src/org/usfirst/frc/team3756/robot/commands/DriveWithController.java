@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.command.Command;
 
 // Start of DriveWithController
 public class DriveWithController extends Command {
-
+	private double moveTriggers;
 	/**
 	 * Drives the robot using Generic HID (Human Interface Device) such as a Joystick or Xbox Controller
 	 */
@@ -24,11 +24,12 @@ public class DriveWithController extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	double moveTriggers = Robot.oi.getController().getRawAxis(2) - Robot.oi.getController().getRawAxis(3);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.driveTrain.drive(Robot.oi.getController(), 2, 4);
+    	Robot.driveTrain.drive(Robot.oi.getController(), 3, 2, 4);
     } // End of method
 
     // Make this return true when this Command no longer needs to run execute()

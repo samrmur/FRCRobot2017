@@ -32,7 +32,7 @@ public class DriveEncoder extends Subsystem {
 	 */
 	public DriveEncoder() {
 		// Instantiate Encoder object
-		wheelEncoder = new Encoder(0, 1, false, Encoder.EncodingType.k4X);
+		wheelEncoder = new Encoder(8, 9, false, Encoder.EncodingType.k4X);
 		
 		// Setup Encoder object
 		wheelEncoder.setDistancePerPulse(DISTANCE_PER_PULSE);
