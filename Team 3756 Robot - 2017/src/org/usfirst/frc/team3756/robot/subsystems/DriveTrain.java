@@ -63,11 +63,12 @@ public class DriveTrain extends Subsystem {
 	 * Allows the robot to be driven by an Xbox Controller using any axis from either joystick on the controller 
 	 * for vertical movement and horizontal movement.
 	 * @param driveController is an Xbox Controller connecting to the drive station.
-	 * @param moveAxis is the port for the controller's left or right stick axis used to move the robot forwards or backwards.
+	 * @param forwardsTrigger is the trigger axis being used to control the forward movement of the robot
+	 * @param backwardsTrigger is the trigger axis being used to control the backward movement of the robot
 	 * @param rotateAxis is the port for the controller's left or right stick axis used to move the robot left or right.
 	 */
 	public void drive(XboxController driveController, int forwardAxis, int backwardAxis, int rotateAxis){
-		driveRobot.arcadeDrive(driveController, forwardAxis, backwardAxis, driveController, rotateAxis);
+		driveRobot.arcadeDrive(driveController, forwardAxis, backwardAxis, rotateAxis);
 	} // End of method
 	
 	/**
