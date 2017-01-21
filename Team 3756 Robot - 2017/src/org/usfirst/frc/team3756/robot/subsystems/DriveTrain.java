@@ -30,7 +30,7 @@ public class DriveTrain extends Subsystem {
 	private SpeedController rightSide;
 	
 	// Declare the robot drive train
-	public RobotDriveXbox driveRobot;
+	public RobotTriggerDrive driveRobot;
 	
 	/**
 	 * Creates a subsystem which will allow the robot to drive. This class allows the program to identify the victor 
@@ -55,7 +55,7 @@ public class DriveTrain extends Subsystem {
 		rightSide = new SpeedControllerArray(rightSideMotors);
 		
 		// Initialize the drive train
-		driveRobot = new RobotDriveXbox(leftSide, rightSide);
+		driveRobot = new RobotTriggerDrive(leftSide, rightSide);
 	    driveRobot.setSafetyEnabled(false);
 	} // End of method
 	
