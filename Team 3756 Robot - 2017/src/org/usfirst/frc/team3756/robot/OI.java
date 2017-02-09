@@ -13,7 +13,6 @@ import org.usfirst.frc.team3756.robot.commands.ShiftGears;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 // Start of OI class
 public class OI {
