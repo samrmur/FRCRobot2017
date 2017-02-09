@@ -7,8 +7,8 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 // Start of AutoCommandGroup1
 public class AutoCommandGroup1 extends CommandGroup {
     public AutoCommandGroup1() {
-    	addSequential(new DriveToDistance(2, -0.5, -0.5));
+    	addSequential(new DriveToDistance(2, -0.5));
     	addSequential(new DriveAngle(-1));
-    	addSequential(new DriveToDistance(2, -0.5, -0.5));
+    	addSequential(new DriveToDistance(2, -0.5));
     } // End of Method
 } // End of class

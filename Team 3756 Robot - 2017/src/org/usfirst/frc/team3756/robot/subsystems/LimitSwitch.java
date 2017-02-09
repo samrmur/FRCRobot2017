@@ -13,20 +13,34 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 // Start of LimitSwitch
 public class LimitSwitch extends Subsystem {
-	public DigitalInput limitSwitch;
+	private DigitalInput leftLimitSwitch;
+	private DigitalInput rightLimitSwitch;
 	
 	/**
 	 * Limit Switch subsystem used only in autonomous mode
 	 */
 	public LimitSwitch() {
-		limitSwitch = new DigitalInput(9);
+		leftLimitSwitch = new DigitalInput(8);
+		rightLimitSwitch = new DigitalInput(9);
 	} // End of constructor
 
 	/**
-	 * Gets the boolean of true or false dependent on if the limit switch is activated
+	 * Gets the boolean of true or false dependent on if the left side limit switch is activated
 	 */
-	public Boolean getValue() {
-		if (limitSwitch.get()) {
+	public Boolean getLeftValue() {
+		if (leftLimitSwitch.get()) {
+			return true;
+		} 
+		else {
+			return false;
+		} // End of if statement
+	} // End of method
+	
+	/**
+	 * Gets the boolean of true or false dependent on if the right side limit switch is activated
+	 */
+	public Boolean getRightValue() {
+		if (rightLimitSwitch.get()) {
 			return true;
 		} 
 		else {

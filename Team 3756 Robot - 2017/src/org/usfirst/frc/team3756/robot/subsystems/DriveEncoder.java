@@ -12,14 +12,15 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 // Start of DriveEncoder
 public class DriveEncoder extends Subsystem {
-	// Declare Encoder object
+	// Declare Encoder objects
 	private Encoder rightWheelEncoder;
 	private Encoder leftWheelEncoder;
 	
 	// Declare and initialize constants
-	private static final double DISTANCE_MEASURED = 1; 
-	private static final double PULSE_MEASURED = 1670; 
-	private static final double DISTANCE_PER_PULSE = DISTANCE_MEASURED / PULSE_MEASURED;  // Get the distance per pulse
+	private static final double WHEEL_CIRCUMFERENCE = 1.0 * Math.PI; // Wheel Diameter multiplied by PI (3.14....)
+	private static final double PULSES_PER_REVOLUTION = 256 / 4; // PPR divided by encoding scale
+	private static final double GEAR_RATIO = 1.0; 
+	private static final double DISTANCE_PER_PULSE = WHEEL_CIRCUMFERENCE / (PULSES_PER_REVOLUTION * GEAR_RATIO);  // Get the distance per pulse
 	
 	/**
 	 * Creates an Encoder object that will detect the distance the robot has traveled

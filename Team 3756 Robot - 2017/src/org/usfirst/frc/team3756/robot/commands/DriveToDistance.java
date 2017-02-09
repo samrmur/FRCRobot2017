@@ -14,24 +14,21 @@ import edu.wpi.first.wpilibj.command.Command;
 public class DriveToDistance extends Command {
 	// Declare distance variable
 	private double distance;
-	private double speedLeft;
-	private double speedRight;
+	private double speed;
 	
 	/**
 	 * Robot will drive until it hits a certain distance (in meters)
 	 * @param distance is the distance the robot will travel
-	 * @param speedLeft is the speed the left side of the robot will travel at (+1 to -1)
-	 * @param speedRight is the speed the right side of the robot will turn at
+	 * @param speed is the speed the robot will travel at (+1 to -1)
 	 */
-    public DriveToDistance(double distance, double speedLeft, double speedRight) {
+    public DriveToDistance(double distance, double speed) {
     	// Get required subsystems
     	requires(Robot.driveTrain);
         requires(Robot.encoder);
         
         // Store parameter variables
         this.distance = distance;
-        this.speedLeft = speedLeft;
-        this.speedRight = speedRight;
+        this.speed = speed;
     } // End of constructor
 
     // Called just before this Command runs the first time
@@ -51,14 +48,14 @@ public class DriveToDistance extends Command {
     	// Checks if both encoder values fall within 10 clicks of each other
     	if ((Robot.encoder.showLeftClicks() - 10) > Robot.encoder.showRightClicks()) {
     		// If left side - 10 is bigger than right side, slow the speed of the left side down
-    		Robot.driveTrain.driveSpeedControllers(speedLeft + 0.1, speedRight);
+    		Robot.driveTrain.driveSpeedControllers(speed + 0.1, speed);
     	}
     	else if (Robot.encoder.showLeftClicks() < (Robot.encoder.showRightClicks() - 10)) {
     		// If right side - 10 is bigger than left side, slow the speed of the right side down
-    		Robot.driveTrain.driveSpeedControllers(speedLeft, speedRight + 0.1);
+    		Robot.driveTrain.driveSpeedControllers(speed, speed + 0.1);
     	}
     	else {
-    		Robot.driveTrain.driveSpeedControllers(speedLeft, speedRight);
+    		Robot.driveTrain.driveSpeedControllers(speed, speed);
     	} // End of if statement
     } // End of method
 

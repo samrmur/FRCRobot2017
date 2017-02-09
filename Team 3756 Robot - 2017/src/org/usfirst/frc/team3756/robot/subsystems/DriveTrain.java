@@ -111,7 +111,7 @@ public class DriveTrain extends Subsystem {
 	public void driveSpeedControllers(double speedLeft, double speedRight) {
 		leftSide.set(speedLeft);
 		
-		// Sets the right side of the robot to inverted to account for the backward gearboxes
+		// Sets the right side of the robot to inverted to account for the backward gear box
 		rightSide.setInverted(true);
 		rightSide.set(speedRight);
 	} // End of method
