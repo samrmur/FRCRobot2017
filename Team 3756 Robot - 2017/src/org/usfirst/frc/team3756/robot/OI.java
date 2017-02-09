@@ -8,8 +8,12 @@
 
 package org.usfirst.frc.team3756.robot;
 
+
+import org.usfirst.frc.team3756.robot.commands.ShiftGears;
+
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 // Start of OI class
 public class OI {
@@ -28,20 +32,20 @@ public class OI {
 		//xboxBButton.whenReleased(new someCommand());
 		
 		JoystickButton xboxXButton = new JoystickButton(userController, 3);
-		//xboxXButton.whileHeld(new someCommand());
+		//xboxAButton.whileHeld(new someCommand());
 		//xboxXButton.whenReleased(new someCommand());
 		
 		JoystickButton xboxYButton = new JoystickButton(userController, 4);
 		//xboxYButton.whileHeld(new someCommand());
 		//xboxYButton.whenReleased(new someCommand());
 		
-		JoystickButton xboxLeftBumper = new JoystickButton(userController, 5);
-		//xboxLeftBumper.whileHeld(new someCommand());
-		//xboxLeftBumper.whenReleased(new someCommand());
-		
+		// Shifts the robot to high gear
 		JoystickButton xboxRightBumper = new JoystickButton(userController, 6);
-		//xboxRightBumper.whileHeld(new someCommand());
-		//xboxRightBumper.whenReleased(new someCommand());
+		xboxRightBumper.whenPressed(new ShiftGears("High"));
+		
+		// Shifts the robot to low low gear
+		JoystickButton xboxLeftBumper = new JoystickButton(userController, 5);
+		xboxLeftBumper.whenPressed(new ShiftGears("Low"));
 		
 		JoystickButton xboxBackButton = new JoystickButton(userController, 7);
 		//xboxStartButton.whenPressed(new someCommand());
@@ -63,4 +67,5 @@ public class OI {
 	public XboxController getController() {
 		return userController;
 	} // End of method
+	
 } // End of class

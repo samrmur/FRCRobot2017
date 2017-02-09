@@ -2,11 +2,7 @@ package org.usfirst.frc.team3756.robot.commandgroups;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
-/**
- *
- */
 public class AutoCommandGroup2 extends CommandGroup {
-
     public AutoCommandGroup2() {
         // Add Commands here:
         // e.g. addSequential(new Command1());

@@ -1,8 +1,8 @@
 /**
- * NAME: Samer Alabi
- * CLASS: DriveWithController
- * PROJECT: Team 3756 - Robot
- * DESCRIPTION: This command will allow the robot to drive using in Command format with an Xbox Controller
+ * NAME: Omar Lopez
+ * CLASS: ShiftGears
+ * PROJECT: Team 3756 Robot - 2017
+ * DESCRIPTION: Shift the robot between low gear and high gear
  */
 
 package org.usfirst.frc.team3756.robot.commands;
@@ -11,15 +11,22 @@ import org.usfirst.frc.team3756.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-// Start of DriveWithController
-public class DriveWithController extends Command {
+// Start of ShiftGears
+public class ShiftGears extends Command {
+	// Declare instance variables
+	private String changeGears;
+	
 	/**
-	 * Drives the robot using Generic HID (Human Interface Device) such as a Joystick or Xbox Controller
+	 * Shifts the robot between high and low gear
+	 * @param changeGears is a string containing the gear switch
 	 */
-    public DriveWithController() {
-    	// Get the subsystem
+    public ShiftGears(String changeGears){
+    	// Get required subsystems
     	requires(Robot.driveTrain);
-    } // End of method
+    	
+    	// Initialize instance variables
+    	this.changeGears = changeGears;
+    } // End of constructor
 
     // Called just before this Command runs the first time
     protected void initialize() {
@@ -27,12 +34,17 @@ public class DriveWithController extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.driveTrain.drive(Robot.oi.getController(), 2, 3, 4);
+    	if(changeGears.equals("High")){
+    		Robot.driveTrain.shiftHigh();
+    	}
+    	else if(changeGears.equals("Low")){
+    		Robot.driveTrain.shiftLow();
+    	} // End of if statement
     } // End of method
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        return false;
     } // End of method
 
     // Called once after isFinished returns true

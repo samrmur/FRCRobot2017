@@ -9,7 +9,7 @@ package org.usfirst.frc.team3756.robot.subsystems;
 
 import org.usfirst.frc.team3756.robot.commands.DriveWithController;
 
-import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.XboxController;
@@ -18,19 +18,21 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 // Start of DriveTrain
 public class DriveTrain extends Subsystem {
 	// Declare each separate speed controller
-	private SpeedController leftFront;
-	private SpeedController leftMiddle;
-	private SpeedController leftBack;
-	private SpeedController rightFront;
-	private SpeedController rightMiddle;
-	private SpeedController rightBack;
-	
+	private SpeedController motorR1;
+	private SpeedController motorR2;
+	private SpeedController motorR3;
+	private SpeedController motorL1;
+	private SpeedController motorL2;
+	private SpeedController motorL3;
+
 	// Declare each Speed Controller (which will contain an array of speed controllers that will act as one)
 	private SpeedController leftSide;
 	private SpeedController rightSide;
+	                
+	private DoubleSolenoid shift = new DoubleSolenoid(1, 0);
 	
-	// Declare the robot drive train
-	public RobotTriggerDrive driveRobot;
+	// Declare the robot drive train and autonomous drives
+	private RobotTriggerDrive driveRobot;
 	
 	/**
 	 * Creates a subsystem which will allow the robot to drive. This class allows the program to identify the victor 
@@ -39,16 +41,16 @@ public class DriveTrain extends Subsystem {
 	 */
 	public DriveTrain() {
 		// Initialize each speed controller
-		leftFront = new VictorSP(0);
-		leftMiddle = new VictorSP(1);
-		leftBack = new VictorSP(2);
-		rightFront = new VictorSP(3);
-		rightMiddle = new VictorSP(4);
-		rightBack = new VictorSP(5);
-		
+		motorR1 = new VictorSP(0);
+		motorR2 = new VictorSP(1);
+		motorR3 = new VictorSP(2);
+		motorL1 = new VictorSP(3);
+		motorL2 = new VictorSP(4);
+		motorL3 = new VictorSP(5);
+
 		// Declare and initialize each speed controller array
-		SpeedController[] leftSideMotors = {leftFront, leftMiddle, leftBack};
-		SpeedController[] rightSideMotors = {rightFront, rightMiddle, rightBack};
+		SpeedController[] leftSideMotors = {motorL1, motorL2, motorL3};
+		SpeedController[] rightSideMotors = {motorR1, motorR2, motorR3};
 		
 		// Initialize the speed controller arrays (making them act as one speed controller each)
 		leftSide = new SpeedControllerArray(leftSideMotors);
@@ -58,6 +60,20 @@ public class DriveTrain extends Subsystem {
 		driveRobot = new RobotTriggerDrive(leftSide, rightSide);
 	    driveRobot.setSafetyEnabled(false);
 	} // End of method
+	
+	/**
+	 * Shifts the robot to high gear
+	 */
+	public void shiftHigh(){
+		shift.set(DoubleSolenoid.Value.kForward);
+	} // End of shiftHigh() method
+	
+	/**
+	 * Shifts the robot to low gear
+	 */
+	public void shiftLow(){
+		shift.set(DoubleSolenoid.Value.kReverse);
+	} // End of shiftLow() method
 	
 	/**
 	 * Allows the robot to be driven by an Xbox Controller using any axis from either joystick on the controller 
@@ -87,9 +103,21 @@ public class DriveTrain extends Subsystem {
 		driveRobot.arcadeDrive(0,0);
 	} // End of method
 	
+	/**
+	 * Drives the robot separately by speed controller
+	 * @param speedLeft is the speed of the left side of the robot
+	 * @param speedRight is the speed of the right side of the robot
+	 */
+	public void driveSpeedControllers(double speedLeft, double speedRight) {
+		leftSide.set(speedLeft);
+		
+		// Sets the right side of the robot to inverted to account for the backward gearboxes
+		rightSide.setInverted(true);
+		rightSide.set(speedRight);
+	} // End of method
+	
 	// Initial command launched by this subsystem
     public void initDefaultCommand() {
         setDefaultCommand(new DriveWithController());
     } // End of method
-    
 } // End of class

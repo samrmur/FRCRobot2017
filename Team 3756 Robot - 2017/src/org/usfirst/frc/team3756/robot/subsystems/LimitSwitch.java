@@ -9,7 +9,6 @@
 package org.usfirst.frc.team3756.robot.subsystems;
 
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 // Start of LimitSwitch
@@ -20,7 +19,7 @@ public class LimitSwitch extends Subsystem {
 	 * Limit Switch subsystem used only in autonomous mode
 	 */
 	public LimitSwitch() {
-		limitSwitch = new DigitalInput(1);
+		limitSwitch = new DigitalInput(9);
 	} // End of constructor
 
 	/**

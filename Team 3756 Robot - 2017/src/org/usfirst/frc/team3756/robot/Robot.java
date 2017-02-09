@@ -3,7 +3,6 @@ package org.usfirst.frc.team3756.robot;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.Sendable;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -12,7 +11,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team3756.robot.commandgroups.AutoCommandGroup1;
 import org.usfirst.frc.team3756.robot.commandgroups.AutoCommandGroup2;
-import org.usfirst.frc.team3756.robot.commandgroups.TestEncoderCommand;
 import org.usfirst.frc.team3756.robot.subsystems.DriveEncoder;
 import org.usfirst.frc.team3756.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team3756.robot.subsystems.LimitSwitch;
@@ -52,21 +50,20 @@ public class Robot extends IterativeRobot {
 		limitSwitch = new LimitSwitch();                                                                                                                                                                                                                                                               
 		encoder = new DriveEncoder();
 
-		// Configure camera                                                                                 
-//		lifeCam.setResolution(320, 240);
-//		lifeCam.setFPS(15);
+		// Configure camera                           
+		lifeCam = CameraServer.getInstance().startAutomaticCapture();
+		lifeCam.setResolution(320, 240);
+		lifeCam.setFPS(15);
 		
 		// Initialize chooser, add commands to chooser and display on the SmartDashboard
 		autoChooser = new SendableChooser<>();
 		autoChooser.addDefault("Default Command", new AutoCommandGroup1());
 		autoChooser.addObject("Position 1 Command", new AutoCommandGroup2());
-		autoChooser.addObject("Test Encoder", new TestEncoderCommand());
 		
 		// Show what command your subsystem is running on the SmartDashboard
 		SmartDashboard.putData("autoChooser", autoChooser);
         SmartDashboard.putData(driveTrain);
         SmartDashboard.putData(limitSwitch); 
-    
 	} // End of method
 	
 	/*
@@ -93,6 +90,12 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
+		
+		// Update numbers on SmartDashboard
+		SmartDashboard.putNumber("Current Distance of Left Encoder", encoder.getLeftWheelDistance());
+	    SmartDashboard.putNumber("Current Distance of Right Encoder", encoder.getRightWheelDistance());
+	    SmartDashboard.putNumber("Current Count of Left Encoder", encoder.showLeftClicks());
+	    SmartDashboard.putNumber("Current Count of Right Encoder", encoder.showRightClicks());
 	} // End of method
 
 	@Override
@@ -100,20 +103,21 @@ public class Robot extends IterativeRobot {
 		// Stops autonomous command from continuing when tele-operated period has started
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
+		
+		// Reset the encoders
+		encoder.reset();
 	} // End of method
 
 	// This function is called periodically during operator control
 	@Override
 	public void teleopPeriodic() {
 	  Scheduler.getInstance().run();
-	  // Show clicks of encoder everytime the wheel turns
-      SmartDashboard.putNumber("Current Count of Right Wheel Encoder", Robot.encoder.showRightClicks());
-      SmartDashboard.putNumber("Current Count of Left Wheel Encoder", Robot.encoder.showLeftClicks()); 
-      SmartDashboard.putNumber("Current Count of Right Wheel Distance", Robot.encoder.getRightWheelDistance()); 
-      SmartDashboard.putNumber("Current Count of Left Wheel Distance", Robot.encoder.getLeftWheelDistance());
-      SmartDashboard.putNumber("Current Count of Right Wheel Rate", Robot.encoder.getRightRate()); 
-      SmartDashboard.putNumber("Current Count of Left Wheel Rate", Robot.encoder.getLeftRate());
-      
+	  
+	  // Update numbers on SmartDashboard
+      SmartDashboard.putNumber("Current Distance of Left Encoder", encoder.getLeftWheelDistance());
+      SmartDashboard.putNumber("Current Distance of Right Encoder", encoder.getRightWheelDistance());
+      SmartDashboard.putNumber("Current Count of Left Encoder", encoder.showLeftClicks());
+      SmartDashboard.putNumber("Current Count of Right Encoder", encoder.showRightClicks());
 	} // End of method
 
 	// This function is called periodically during test mode

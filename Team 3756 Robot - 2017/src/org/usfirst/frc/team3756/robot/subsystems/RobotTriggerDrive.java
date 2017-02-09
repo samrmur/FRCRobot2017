@@ -13,7 +13,8 @@ import edu.wpi.first.wpilibj.SpeedController;
 
 // Start of RobotDriveXbox
 public class RobotTriggerDrive extends RobotDrive {
-	  /**
+	
+	/**
 	   * Constructor for RobotDrive with 2 motors specified with channel numbers. Set up parameters for
 	   * a two wheel drive system where the left and right motor pwm channels are specified in the call.
 	   * This call assumes Talons for controlling the motors. (Taken from official RobotDrive class)
@@ -78,6 +79,6 @@ public class RobotTriggerDrive extends RobotDrive {
 		double rotateValue = moveStick.getRawAxis(rotateAxis);
 		
 		// Drives robot at provided move and rotate values
-		arcadeDrive(moveValue, rotateValue, true);
+		arcadeDrive(moveValue, rotateValue, true); 
 	} // End of method
 } // End of class
